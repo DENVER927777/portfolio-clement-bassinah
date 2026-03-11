@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bassinah Clément — Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0b;
+            --surface: #131315;
+            --surface-2: #1a1a1e;
+            --accent: #00d4aa;
+            --accent-dim: #00d4aa22;
+            --accent-mid: #00d4aa66;
+            --text: #e8e8ed;
+            --text-dim: #8888a0;
+            --text-bright: #ffffff;
+            --border: #2a2a35;
+            --gradient-1: linear-gradient(135deg, #00d4aa, #0088ff);
+            --gradient-2: linear-gradient(135deg, #00d4aa33, #0088ff33);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) var(--bg);
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ============ CURSOR GLOW ============ */
+        .cursor-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--accent-dim) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            transform: translate(-50%, -50%);
+            transition: left 0.3s ease, top 0.3s ease;
+        }
+
+        /* ============ NAV ============ */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 11, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.3rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-cta {
+            padding: 0.5rem 1.2rem;
+            background: var(--gradient-1);
+            color: var(--bg) !important;
+            border-radius: 6px;
+            font-weight: 700 !important;
+            -webkit-text-fill-color: var(--bg) !important;
+            -webkit-background-clip: unset !important;
+        }
+
+        .nav-cta::after { display: none !important; }
+
+        /* ============ HERO ============ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 4rem 4rem;
+            position: relative;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -2px;
+            color: var(--text-bright);
+            margin-bottom: 1rem;
+        }
+
+        .hero-text h1 .accent {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            max-width: 480px;
+            line-height: 1.7;
+        }
+
+        .hero-badges {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .badge {
+            padding: 0.4rem 1rem;
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-primary {
+            padding: 0.8rem 2rem;
+            background: var(--gradient-1);
+            color: var(--bg);
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--accent-mid);
+        }
+
+        .btn-secondary {
+            padding: 0.8rem 2rem;
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: border-color 0.3s, color 0.3s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-card {
+            width: 340px;
+            height: 420px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, var(--accent-dim), transparent, transparent);
+            animation: rotate-border 8s linear infinite;
+        }
+
+        @keyframes rotate-border {
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-card-inner {
+            position: relative;
+            z-index: 2;
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .terminal-line {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            animation: typeIn 0.5s forwards;
+        }
+
+        .terminal-line:nth-child(1) { animation-delay: 0.5s; }
+        .terminal-line:nth-child(2) { animation-delay: 1s; }
+        .terminal-line:nth-child(3) { animation-delay: 1.5s; }
+        .terminal-line:nth-child(4) { animation-delay: 2s; }
+        .terminal-line:nth-child(5) { animation-delay: 2.5s; }
+        .terminal-line:nth-child(6) { animation-delay: 3s; }
+
+        .terminal-line .dim { color: var(--text-dim); }
+        .terminal-line .bright { color: var(--text-bright); }
+
+        @keyframes typeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ============ SECTIONS ============ */
+        section {
+            padding: 6rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            color: var(--text-bright);
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .section-desc {
+            color: var(--text-dim);
+            max-width: 600px;
+            margin-bottom: 3rem;
+            font-size: 1.05rem;
+        }
+
+        /* ============ SKILLS ============ */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: border-color 0.3s, transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .skill-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-1);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .skill-card:hover::after { opacity: 1; }
+
+        .skill-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--accent-dim);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .skill-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-bright);
+            margin-bottom: 0.6rem;
+        }
+
+        .skill-card p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 1rem;
+        }
+
+        .skill-tag {
+            padding: 0.25rem 0.7rem;
+            background: var(--surface-2);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            color: var(--accent);
+            border: 1px solid var(--accent-dim);
+        }
+
+        /* ============ EXPERIENCE ============ */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent), var(--border));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .timeline-item:hover { border-color: var(--accent); }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3rem;
+            top: 2.5rem;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            transform: translateX(-5px);
+            box-shadow: 0 0 16px var(--accent-mid);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .timeline-role {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-bright);
+        }
+
+        .timeline-company {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .timeline-date {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            padding: 0.3rem 0.8rem;
+            background: var(--surface-2);
+            border-radius: 100px;
+        }
+
+        .timeline-desc {
+            color: var(--text-dim);
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+
+        .timeline-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 1rem;
+        }
+
+        /* ============ FORMATION ============ */
+        .formation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .formation-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .formation-card:hover { transform: translateY(-4px); }
+
+        .formation-year {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .formation-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-bright);
+            margin-bottom: 0.4rem;
+        }
+
+        .formation-card .school {
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .formation-card .mention {
+            display: inline-block;
+            margin-top: 0.8rem;
+            padding: 0.3rem 0.8rem;
+            background: var(--accent-dim);
+            color: var(--accent);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* ============ LANGUES ============ */
+        .langues-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .langue-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .langue-card:hover { transform: translateY(-4px); }
+
+        .langue-level {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--accent);
+        }
+
+        .langue-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-bright);
+        }
+
+        /* ============ CONTACT ============ */
+        .contact-section {
+            text-align: center;
+            padding: 8rem 4rem;
+        }
+
+        .contact-section .section-desc {
+            margin: 0 auto 3rem;
+        }
+
+        .contact-grid {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: border-color 0.3s, transform 0.3s;
+            text-decoration: none;
+        }
+
+        .contact-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .contact-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--accent-dim);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .contact-info h4 {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-bright);
+            font-weight: 600;
+        }
+
+        .contact-info p {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        /* ============ FOOTER ============ */
+        footer {
+            text-align: center;
+            padding: 3rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        footer span {
+            color: var(--accent);
+        }
+
+        /* ============ DISPONIBILITE BANNER ============ */
+        .dispo-banner {
+            background: var(--gradient-2);
+            border: 1px solid var(--accent-mid);
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .dispo-banner h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-bright);
+            margin-bottom: 0.5rem;
+        }
+
+        .dispo-banner p {
+            color: var(--text-dim);
+            margin-bottom: 1.5rem;
+        }
+
+        .dispo-dates {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: var(--accent);
+            color: var(--bg);
+            font-weight: 700;
+            border-radius: 8px;
+            font-family: 'Syne', sans-serif;
+        }
+
+        /* ============ ANIMATIONS ============ */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 768px) {
+            nav { padding: 1rem; }
+            .nav-links { display: none; }
+            .hero { padding: 6rem 1.5rem 3rem; }
+            .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .hero-visual { order: -1; }
+            .hero-card { width: 100%; height: 320px; }
+            section { padding: 4rem 1.5rem; }
+            .contact-section { padding: 4rem 1.5rem; }
+            .timeline { padding-left: 2rem; }
+        }
+
+        /* ============ MOBILE NAV ============ */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn { display: block; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-logo">B.C</div>
+    <ul class="nav-links">
+        <li><a href="#competences">Compétences</a></li>
+        <li><a href="#experience">Expérience</a></li>
+        <li><a href="#formation">Formation</a></li>
+        <li><a href="#langues">Langues</a></li>
+        <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+    <button class="mobile-menu-btn" onclick="document.querySelector('.nav-links').classList.toggle('show')">☰</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-grid">
+        <div class="hero-text">
+            <h1>Bassinah<br><span class="accent">Clément</span></h1>
+            <p class="hero-subtitle">
+                Étudiant en BTS SIO, passionné par l'infrastructure IT, les réseaux et la résolution de problèmes techniques. À la recherche d'un stage de 6 semaines en tant que Technicien Informatique.
+            </p>
+            <div class="hero-badges">
+                <span class="badge">🖥️ BTS SIO</span>
+                <span class="badge">🌐 Réseaux</span>
+                <span class="badge">🐍 Python</span>
+                <span class="badge">🔧 Support IT</span>
+            </div>
+            <div class="hero-ctas">
+                <a href="#contact" class="btn-primary">Me contacter</a>
+                <a href="#competences" class="btn-secondary">Voir mes compétences</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-card">
+                <div class="hero-card-inner">
+                    <div class="terminal-line"><span class="dim">$</span> whoami</div>
+                    <div class="terminal-line"><span class="bright">Bassinah Clément</span></div>
+                    <div class="terminal-line"><span class="dim">$</span> cat skills.txt</div>
+                    <div class="terminal-line">TCP/IP • VLAN • DHCP • DNS</div>
+                    <div class="terminal-line"><span class="dim">$</span> status</div>
+                    <div class="terminal-line"><span style="color:#00ff88">● disponible</span> — stage 18/05 → 19/06</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- COMPÉTENCES -->
+<section id="competences" class="fade-in">
+    <div class="section-label">Compétences</div>
+    <h2 class="section-title">Mon arsenal technique</h2>
+    <p class="section-desc">Des compétences en constante évolution, combinant maîtrise technique et savoir-être professionnel.</p>
+
+    <div class="skills-grid">
+        <div class="skill-card">
+            <div class="skill-icon">🌐</div>
+            <h3>Réseaux & Protocoles</h3>
+            <p>Maîtrise des fondamentaux réseau : adressage, routage, segmentation et analyse de trafic.</p>
+            <div class="skill-tags">
+                <span class="skill-tag">TCP/IP</span>
+                <span class="skill-tag">ARP</span>
+                <span class="skill-tag">DHCP</span>
+                <span class="skill-tag">DNS</span>
+                <span class="skill-tag">ICMP</span>
+                <span class="skill-tag">STP</span>
+                <span class="skill-tag">VLAN</span>
+            </div>
+        </div>
+
+        <div class="skill-card">
+            <div class="skill-icon">💻</div>
+            <h3>Développement</h3>
+            <p>Bases solides en programmation et scripting, avec une curiosité constante pour apprendre de nouveaux langages.</p>
+            <div class="skill-tags">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">JavaScript</span>
+            </div>
+        </div>
+
+        <div class="skill-card">
+            <div class="skill-icon">🔧</div>
+            <h3>Outils & Environnements</h3>
+            <p>Utilisation d'outils professionnels pour l'analyse réseau, la virtualisation et la productivité.</p>
+            <div class="skill-tags">
+                <span class="skill-tag">Wireshark</span>
+                <span class="skill-tag">VMware 17</span>
+                <span class="skill-tag">Word</span>
+                <span class="skill-tag">Excel</span>
+                <span class="skill-tag">PowerPoint</span>
+            </div>
+        </div>
+
+        <div class="skill-card">
+            <div class="skill-icon">🎨</div>
+            <h3>Design & Création</h3>
+            <p>Sensibilité graphique et maîtrise d'outils de création visuelle pour des supports de communication efficaces.</p>
+            <div class="skill-tags">
+                <span class="skill-tag">Photoshop</span>
+                <span class="skill-tag">Illustrator</span>
+                <span class="skill-tag">Canva</span>
+            </div>
+        </div>
+
+        <div class="skill-card">
+            <div class="skill-icon">🤝</div>
+            <h3>Soft Skills</h3>
+            <p>Qualités humaines et professionnelles développées par l'expérience terrain et le travail en équipe.</p>
+            <div class="skill-tags">
+                <span class="skill-tag">Communication</span>
+                <span class="skill-tag">Autonomie</span>
+                <span class="skill-tag">Adaptabilité</span>
+                <span class="skill-tag">Esprit d'équipe</span>
+                <span class="skill-tag">Initiative</span>
+                <span class="skill-tag">Ponctualité</span>
+            </div>
+        </div>
+
+        <div class="skill-card">
+            <div class="skill-icon">⚡</div>
+            <h3>Travail sous pression</h3>
+            <p>Gestion du stress, rapidité d'exécution et polyvalence, capacités forgées en environnement exigeant.</p>
+            <div class="skill-tags">
+                <span class="skill-tag">Gestion du stress</span>
+                <span class="skill-tag">Polyvalence</span>
+                <span class="skill-tag">Réactivité</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- EXPÉRIENCE -->
+<section id="experience" class="fade-in">
+    <div class="section-label">Expérience</div>
+    <h2 class="section-title">Parcours professionnel</h2>
+    <p class="section-desc">Des expériences concrètes qui m'ont appris le sens du travail, de la rigueur et du service.</p>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-header">
+                <div>
+                    <div class="timeline-role">Employé polyvalent</div>
+                    <div class="timeline-company">McDonald's — Paris 75001</div>
+                </div>
+                <span class="timeline-date">Janvier 2025 — Présent</span>
+            </div>
+            <p class="timeline-desc">
+                Gestion du stress en période de forte affluence. Application rigoureuse des normes d'hygiène et de sécurité alimentaire. Polyvalence sur plusieurs postes : salle, cuisine, drive, prise et vérification de commandes. Prise de commande, encaissement et accueil professionnel des clients. Coordination fluide avec l'équipe pour un service rapide et efficace.
+            </p>
+            <div class="timeline-skills">
+                <span class="skill-tag">Service client</span>
+                <span class="skill-tag">Travail d'équipe</span>
+                <span class="skill-tag">Gestion du stress</span>
+                <span class="skill-tag">Polyvalence</span>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-header">
+                <div>
+                    <div class="timeline-role">Employé polyvalent</div>
+                    <div class="timeline-company">Teaven — Franconville 95</div>
+                </div>
+                <span class="timeline-date">2021 — Présent</span>
+            </div>
+            <p class="timeline-desc">
+                Stage d'observation d'une semaine suivi d'un engagement bénévole dans l'entreprise familiale. Gestion des tâches quotidiennes priorisées selon leur urgence. Gestion des inventaires et procédures de fermeture. Communication proactive pour anticiper les ruptures de stock. Prise d'initiatives et service client attentif.
+            </p>
+            <div class="timeline-skills">
+                <span class="skill-tag">Gestion de stock</span>
+                <span class="skill-tag">Initiative</span>
+                <span class="skill-tag">Communication</span>
+                <span class="skill-tag">Fiabilité</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FORMATION -->
+<section id="formation" class="fade-in">
+    <div class="section-label">Formation</div>
+    <h2 class="section-title">Mon parcours académique</h2>
+    <p class="section-desc">Un cursus qui m'a conduit vers le numérique et l'informatique.</p>
+
+    <div class="formation-grid">
+        <div class="formation-card">
+            <div class="formation-year">2025</div>
+            <h3>BTS SIO (Services Informatiques aux Organisations)</h3>
+            <div class="school">Pôle supérieur Montalembert — Courbevoie (92)</div>
+            <span class="mention">En cours — 1ère année</span>
+        </div>
+
+        <div class="formation-card">
+            <div class="formation-year">2024</div>
+            <h3>Bac général — Spécialités Anglais & Sciences Numériques</h3>
+            <div class="school">Lycée Guy de Maupassant</div>
+            <span class="mention">Mention Assez Bien</span>
+        </div>
+
+        <div class="formation-card">
+            <div class="formation-year">2021</div>
+            <h3>Brevet des collèges</h3>
+            <div class="school">Collège Marguerite Duras</div>
+            <span class="mention">Mention Bien</span>
+        </div>
+    </div>
+</section>
+
+<!-- LANGUES -->
+<section id="langues" class="fade-in">
+    <div class="section-label">Langues</div>
+    <h2 class="section-title">Compétences linguistiques</h2>
+
+    <div class="langues-grid">
+        <div class="langue-card">
+            <div class="langue-level">B2</div>
+            <h3>Anglais</h3>
+            <p style="color:var(--text-dim); font-size:0.85rem; margin-top:0.5rem;">Niveau indépendant avancé</p>
+        </div>
+        <div class="langue-card">
+            <div class="langue-level">B1</div>
+            <h3>Espagnol</h3>
+            <p style="color:var(--text-dim); font-size:0.85rem; margin-top:0.5rem;">Niveau intermédiaire</p>
+        </div>
+        <div class="langue-card">
+            <div class="langue-level">C2</div>
+            <h3>Français</h3>
+            <p style="color:var(--text-dim); font-size:0.85rem; margin-top:0.5rem;">Langue maternelle</p>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section fade-in">
+    <div class="section-label">Contact</div>
+    <h2 class="section-title">Travaillons ensemble</h2>
+    <p class="section-desc">Je suis à la recherche d'un stage et disponible pour échanger sur toute opportunité.</p>
+
+    <div class="contact-grid">
+        <a href="mailto:clement.bassinah@gmail.com" class="contact-card">
+            <div class="contact-icon">✉️</div>
+            <div class="contact-info">
+                <h4>Email</h4>
+                <p>clement.bassinah@gmail.com</p>
+            </div>
+        </a>
+        <a href="tel:0686177024" class="contact-card">
+            <div class="contact-icon">📱</div>
+            <div class="contact-info">
+                <h4>Téléphone</h4>
+                <p>06 86 17 70 24</p>
+            </div>
+        </a>
+        <div class="contact-card">
+            <div class="contact-icon">📍</div>
+            <div class="contact-info">
+                <h4>Localisation</h4>
+                <p>466 rue Gabriel Péri, 92700 Colombes</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dispo-banner">
+        <h3>🟢 Disponible pour un stage</h3>
+        <p>Technicien Informatique — BTS SIO — 6 semaines</p>
+        <div class="dispo-dates">18 mai 2026 → 19 juin 2026</div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 Bassinah Clément — Tous droits réservés. Fait avec <span>♥</span> et du code.</p>
+</footer>
+
+<script>
+    // Cursor glow effect
+    const glow = document.getElementById('cursorGlow');
+    document.addEventListener('mousemove', (e) => {
+        glow.style.left = e.clientX + 'px';
+        glow.style.top = e.clientY + 'px';
+    });
+
+    // Fade in on scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
